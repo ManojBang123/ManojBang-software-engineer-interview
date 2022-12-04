@@ -1,6 +1,7 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Zip.InstallmentsService
+namespace Zip.InstallmentsService.Models
 {
     /// <summary>
     /// Data structure which defines all the properties for an installment.
@@ -13,13 +14,16 @@ namespace Zip.InstallmentsService
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the date that the installment payment is due.
+        /// Gets or sets the date in specific date format that the installment payment is due.
         /// </summary>
-        public DateTime DueDate { get; set; }
+        /// 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString ="{0:MM/dd/yyyy}")]
+        [DataType(DataType.Date)]
+        public String DueDate { get; set; }
 
         /// <summary>
         /// Gets or sets the amount of the installment.
         /// </summary>
         public decimal Amount { get; set; }
-	}
+    }
 }

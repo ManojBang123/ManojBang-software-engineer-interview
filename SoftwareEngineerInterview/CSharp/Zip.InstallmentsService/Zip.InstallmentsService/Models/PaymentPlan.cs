@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace Zip.InstallmentsService
+namespace Zip.InstallmentsService.Models
 {
     /// <summary>
     /// Data structure which defines all the properties for a purchase installment plan.
@@ -9,8 +10,8 @@ namespace Zip.InstallmentsService
     {
         public Guid Id { get; set; }
 
-		public decimal PurchaseAmount { get; set; }
+        public decimal PurchaseAmount { get; set; }
 
-        public Installment[] Installments { get; set; }
+        public List<Installment> Installments { get; set; }
     }
 }
