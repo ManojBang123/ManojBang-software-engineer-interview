@@ -1,4 +1,4 @@
-# Zip Installment Calcualtor Service
+# Zip Installment Calculator Service
 
 ## Patterns/Technologies/Packages:
 This Solution is built using Repository Pattern and Unit of Work Pattern . Below are technolgies, pattterns,packages involved in this project 
