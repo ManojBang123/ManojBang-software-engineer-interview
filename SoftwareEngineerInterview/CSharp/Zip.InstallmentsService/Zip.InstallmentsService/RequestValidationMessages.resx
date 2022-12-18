@@ -123,4 +123,7 @@
   <data name="NotEmptyMessage" xml:space="preserve">
     <value>is Required</value>
   </data>
+  <data name="ValidInputMessage" xml:space="preserve">
+    <value>Minimum Value is  : 1</value>
+  </data>
 </root>

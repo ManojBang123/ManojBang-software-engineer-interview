@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Zip.InstallmentsService.Models;
+using Zip.InstallmentsService.Contracts;
 using Zip.InstallmentsService.ViewModels;
 
-namespace Zip.InstallmentsService
+namespace Zip.InstallmentsService.Services
 {
     /// <summary>
     /// Interface IPaymentPlanFactory - method declartion to create Payment Plan 
     /// </summary>
-    public interface IPaymentPlanFactory
+    public interface IPaymentPlanService
     {
-        PaymentPlan CreatePaymentPlan(PaymentPlanViewModel paymentPlanViewModel);
+        Task<PaymentPlanResponse> CreatePaymentPlan(PaymentPlanRequest paymentPlanRequest);
     }
 }

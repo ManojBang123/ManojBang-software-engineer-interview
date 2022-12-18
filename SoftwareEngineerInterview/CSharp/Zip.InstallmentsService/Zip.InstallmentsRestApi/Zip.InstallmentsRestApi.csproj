@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Zip.InstallmentsService.Persistence\Zip.InstallmentsService.Persistence.csproj" />
     <ProjectReference Include="..\Zip.InstallmentsService\Zip.InstallmentsService.csproj" />
   </ItemGroup>
 

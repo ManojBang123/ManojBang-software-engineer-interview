@@ -77,5 +77,14 @@ namespace Zip.InstallmentsService {
                 return ResourceManager.GetString("NotEmptyMessage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Value is  : 1.
+        /// </summary>
+        internal static string ValidInputMessage {
+            get {
+                return ResourceManager.GetString("ValidInputMessage", resourceCulture);
+            }
+        }
     }
 }

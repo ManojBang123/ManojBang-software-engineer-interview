@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using Zip.InstallmentsService;
-using Zip.InstallmentsService.Models;
+using Zip.InstallmentsService.Contracts;
+using Zip.InstallmentsService.Domain.UnitOfWork;
+using Zip.InstallmentsService.Services;
 using Zip.InstallmentsService.Validator;
 using Zip.InstallmentsService.ViewModels;
 
@@ -17,23 +19,23 @@ namespace Zip.InstallmentsRestApi.Controllers
     {
 
         private readonly ILogger<PaymentPlanController> _logger;
-        private readonly IUnitOfWork _unitOfWork;
+        private  IPaymentPlanService _paymentPlanService;
 
-        public PaymentPlanController(ILogger<PaymentPlanController> logger, IUnitOfWork unitOfWork)
+        public PaymentPlanController(ILogger<PaymentPlanController> logger, IPaymentPlanService paymentPlanService)
         {
             _logger = logger;
-            _unitOfWork = unitOfWork;
+            _paymentPlanService = paymentPlanService;
         }
         [HttpPost("InstallmentCalcualtor")]
         [Produces("application/json")]
 
-        [SwaggerResponse((int)HttpStatusCode.OK,"Sucesss", typeof(PaymentPlan))]
+        [SwaggerResponse((int)HttpStatusCode.OK,"Sucesss", typeof(PaymentPlanResponse))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, "Bad Request", typeof(ValidationErrors))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, "Not Found",typeof(Error))]
       
 
         [SwaggerOperation(Summary = "InstallmentCalcualtor", Description ="This is to just calculate installments with given amount and frequency")]
-        public IActionResult InstallmentCalcualtor([FromBody] PaymentPlanViewModel paymentPlanViewModel)
+        public async Task<IActionResult> InstallmentCalcualtor([FromBody] PaymentPlanRequest paymentPlanViewModel)
         {
 
             _logger.Log(LogLevel.Information, "InstallmentCalcualtor Action is Invoked");
@@ -47,7 +49,7 @@ namespace Zip.InstallmentsRestApi.Controllers
             {
                 if (requestvalidationResult.IsValid)
                 {
-                   var paymentplan = _unitOfWork.PaymentPlanFactory.CreatePaymentPlan(paymentPlanViewModel);
+                   var paymentplan = await _paymentPlanService.CreatePaymentPlan(paymentPlanViewModel);
                     if (paymentplan != null)
                         responseResult = Ok(paymentplan);
                     else
